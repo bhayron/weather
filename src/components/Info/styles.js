@@ -1,5 +1,6 @@
 import styled from 'styled-components/native';
 
+
 export const Container = styled.SafeAreaView`
   flex: 1;
   width: 100%;
@@ -20,25 +21,27 @@ export const Main = styled.View`
 `;
 
 export const Description = styled.Text`
+  font-family: ${({theme})=>theme.fonts.extra};
   font-size: 26px;
   color: white;
-  font-weight: bold;
   margin-top: 6px;
 `;
 
 export const DateInfo = styled.Text`
+  font-family: ${({theme})=>theme.fonts.regular};
   font-size: 26px;
   color: white;
 `;
 
 export const Temp = styled.Text`
-  font-size: 80px;
+  font-family: ${({theme})=>theme.fonts.regular};
+  font-size: 100px;
   color: white;
-  font-weight: bold;
 `;
 
 export const Localization = styled.Text`
-  font-size: 50px;
+ font-family: ${({theme})=>theme.fonts.extra};
+  font-size: 30px;
   color: white;
 `;
 
@@ -54,29 +57,32 @@ export const ValueView = styled.View`
 `;
 
 export const ValueTitle = styled.Text`
-  color: white;
+  font-family: ${({theme})=>theme.fonts.extra};
+  color: #fff;
   font-size: 26px;
 `;
 
 export const Value = styled.Text`
+  font-family: ${({theme})=>theme.fonts.extra};
   color: white;
   font-size: 26px;
-  font-weight: bold;
 `;
 
-export const Button = styled.TouchableOpacity`
+export const Button = styled.TouchableOpacity`  
   align-items: center;
   justify-content: center;
   width: 90%;
   height: 55px;
   background: white;
+  opacity: 0.7;
   margin-top: 35px;
   margin-bottom: 40px;
   border-radius: 6px;
 `;
 
 export const ButtonText = styled.Text`
+  font-family: ${({theme})=>theme.fonts.extra};
   color: black;
-  font-size: 26px;
-  font-weight: bold;
+  font-size: 22px;
+  padding: 10px;
 `;

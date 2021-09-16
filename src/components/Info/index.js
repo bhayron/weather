@@ -5,6 +5,8 @@ import moment from 'moment';
 import 'moment/locale/pt-br';
 import Loader from 'react-native-loading-spinner-overlay';
 
+import * as Location from 'expo-location'
+
 import {
   Container,
   Header,
@@ -22,78 +24,95 @@ import {
 } from './styles';
 import api from '../../services/api';
 
+
+console.log("Log",api);
+
+
 export default function Info() {
-  const [temp, setTemp] = useState(0);
-  const [desc, setDesc] = useState('');
-  const [local, setLocal] = useState('');
-  const [min, setMin] = useState(0);
-  const [max, setMax] = useState(0);
-  const [load, setLoad] = useState(false);
-  const [date] = useState(new Date());
 
-  async function getData() {
-    setLoad(true);
-    const {latitude, longitude} = await GetLocation.getCurrentPosition({
-      enableHighAccuracy: true,
-      timeout: 15000,
-    });
-    const {data} = await api.get(
-      `weather?lat=${latitude}&lon=${longitude}&&units=metric&lang=pt_br&APPID=f5aba605934a36c9f57fce4b24938e48`,
-    );
-
-    setLocal(data.name);
-    setDesc(data.weather[0].description);
-    setTemp(Math.floor(data.main.temp));
-    setMin(Math.floor(data.main.temp_min));
-    setMax(Math.floor(data.main.temp_max));
-    setLoad(false);
-  }
-
-  useEffect(() => {
-    getData();
-  }, []);
-
+ 
   return (
     <Container>
-      <Loader
+      {/* <Loader
         visible={load}
         animation="fade"
         overlayColor="rgba(0, 0, 0, 0.8)"
         textContent="Carregando..."
         textStyle={{color: 'white', fontSize: 25}}
-      />
+      /> */}
 
       <Header>
-        <Icon name="sun" size={50} color="white" />
+        <Icon name="cloud-rain" size={50} color="white" fontWeight={444}/>
 
-        <Localization>{local}</Localization>
+        <Localization>Araguaína</Localization>
 
         <DateInfo>
-          {moment(date).locale('pt-br').format('dddd, D [de] MMMM')}
+          15/09/2021
         </DateInfo>
       </Header>
 
       <Main>
-        <Temp>{temp} °c</Temp>
+        <Temp>27 °c</Temp>
 
         <Divisor />
 
-        <Description>{desc.toUpperCase()}</Description>
+        <Description>Descrição</Description>
 
         <ValueView>
           <ValueTitle>min </ValueTitle>
 
-          <Value>{min} ° / </Value>
+          <Value>14 ° / </Value>
 
           <ValueTitle>max </ValueTitle>
 
-          <Value>{max} °</Value>
+          <Value>37 °</Value>
         </ValueView>
       </Main>
 
-      <Button onPress={getData} activeOpacity={0.8}>
+      <Button onPress=''activeOpacity={0.8}>
         <ButtonText>Atualizar</ButtonText>
       </Button>
     </Container>
+  //   <Container>
+  //   {/* <Loader
+  //     visible={load}
+  //     animation="fade"
+  //     overlayColor="rgba(0, 0, 0, 0.8)"
+  //     textContent="Carregando..."
+  //     textStyle={{color: 'white', fontSize: 25}}
+  //   /> */}
+
+  //   <Header>
+  //     <Icon name="sun" size={50} color="white" />
+
+  //     <Localization>{local}</Localization>
+
+  //     <DateInfo>
+  //       {moment(date).locale('pt-br').format('dddd, D [de] MMMM')}
+  //     </DateInfo>
+  //   </Header>
+
+  //   <Main>
+  //     <Temp>{temp} °c</Temp>
+
+  //     <Divisor />
+
+  //     <Description>{desc.toUpperCase()}</Description>
+
+  //     <ValueView>
+  //       <ValueTitle>min </ValueTitle>
+
+  //       <Value>{min} ° / </Value>
+
+  //       <ValueTitle>max </ValueTitle>
+
+  //       <Value>{max} °</Value>
+  //     </ValueView>
+  //   </Main>
+
+  //   <Button onPress={getData} activeOpacity={0.8}>
+  //     <ButtonText>Atualizar</ButtonText>
+  //   </Button>
+  // </Container>
   );
 }
